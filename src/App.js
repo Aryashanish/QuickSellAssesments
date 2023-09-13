@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+// import NestedDropdown from './components/NestedDropdown';
+import React, { useState } from 'react';
+import Groupwise from './components/Groupwise';
+import Prioritywise from './components/Prioritywise'
+import NestedDropdown from './components/NestedDropdown';
+import Namewise from './components/Namewise';
+import DisplayBtn from './components/DisplayBtn';
 
 function App() {
+  const initialComponent = Namewise;
+  const [activeComponent, setActiveComponent] = useState(initialComponent);
+
+  const addGroupingComponent = () => {
+    setActiveComponent(Groupwise);
+  };
+
+  const addPriorityComponent = () => {
+    setActiveComponent(Prioritywise);
+  };
+
+  const addUserComponent = () => {
+    setActiveComponent(Namewise);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <DisplayBtn addUserComponent={addUserComponent} addGroupingComponent={addGroupingComponent} addPriorityComponent={addPriorityComponent} />
+      <div>
+        {activeComponent}
+      </div>
     </div>
   );
 }
